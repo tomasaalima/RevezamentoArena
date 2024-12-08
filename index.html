@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Revezamento da Arena</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+    </style>
+</head>
+<body>
+    <h1>Revezamento da Arena</h1>
+    <table id="revezamento-table">
+        <thead>
+            <tr>
+                <th>Data</th>
+                <th>1º Lugar</th>
+                <th>2º Lugar</th>
+                <th>3º Lugar</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+    <script>
+        const data = [
+            { "day": 4, "first": "Doritos", "second": "ETGamer", "third": "Bearer"},
+            { "day": 5, "first": "ETGamer", "second": "Doritos", "third": "WLevi"},
+            { "day": 6, "first": "WLevi", "second": "ETGamer", "third": "Doritos" },
+            { "day": 7, "first": "BCord", "second": "Doritos", "third": "ETGamer" },
+            { "day": 8, "first": "Dark", "second": "ETGamer", "third": "Doritos" },
+            { "day": 9, "first": "Sukogojo", "second": "Doritos", "third": "ETGamer" },
+            { "day": 10, "first": "Bearer", "second": "ETGamer", "third": "Doritos" },
+            { "day": 11, "first": "Doritos", "second": "ETGamer", "third": "BCord"},
+            { "day": 12, "first": "ETGamer", "second": "Doritos", "third": "Sukogojo"},
+            { "day": 13, "first": "WLevi", "second": "ETGamer", "third": "Doritos" },
+            { "day": 14, "first": "BCord", "second": "Doritos", "third": "ETGamer" },
+            { "day": 15, "first": "Dark", "second": "ETGamer", "third": "Doritos" },
+            { "day": 16, "first": "Sukogojo", "second": "Doritos", "third": "ETGamer" },
+            { "day": 17, "first": "Bearer", "second": "ETGamer", "third": "Doritos" },
+            { "day": 18, "first": "Doritos", "second": "ETGamer", "third": "Dark"},
+            { "day": 19, "first": "ETGamer", "second": "Doritos", "third": "Bearer"},
+            { "day": 20, "first": "WLevi", "second": "ETGamer", "third": "Doritos" },
+            { "day": 21, "first": "BCord", "second": "Doritos", "third": "ETGamer" },
+            { "day": 22, "first": "Dark", "second": "ETGamer", "third": "Doritos" },
+            { "day": 23, "first": "Sukogojo", "second": "Doritos", "third": "ETGamer" },
+            { "day": 24, "first": "Bearer", "second": "ETGamer", "third": "Doritos" },
+            { "day": 25, "first": "Doritos", "second": "ETGamer", "third": "WLevi"},
+            { "day": 26, "first": "ETGamer", "second": "Doritos", "third": "BCord"},
+            { "day": 27, "first": "WLevi", "second": "ETGamer", "third": "Doritos" },
+            { "day": 28, "first": "BCord", "second": "Doritos", "third": "ETGamer" },
+            { "day": 29, "first": "Dark", "second": "ETGamer", "third": "Doritos" },
+            { "day": 30, "first": "Sukogojo", "second": "Doritos", "third": "ETGamer"},
+            { "day": 31, "first": "Bearer", "second": "ETGamer", "third": "Doritos" },
+        ];
+
+        const tableBody = document.querySelector("#revezamento-table tbody");
+
+        const formatDate = (dayOffset) => {
+            const startDate = new Date("2024-12-04");
+            const targetDate = new Date(startDate);
+            
+            targetDate.setDate(startDate.getDate() + dayOffset);
+            return targetDate.toLocaleDateString("pt-BR", { weekday: 'long', day: '2-digit', month: '2-digit', year: 'numeric' });
+        };
+        
+        const now = new Date(Date.now());
+        const dayOfMonth = now.getDate(); 
+        console.log(dayOfMonth)
+
+        data.forEach(item => {
+            const row = document.createElement("tr");
+
+            if (item.day < dayOfMonth) {
+                row.style.backgroundColor = "green";
+                row.style.color = "white";
+            }
+
+            if (item.day == dayOfMonth) {
+                row.style.backgroundColor = "red";
+                row.style.color = "white";
+            }
+
+            const dateCell = document.createElement("td");
+            dateCell.textContent = formatDate(item.day - 3);
+
+            const firstCell = document.createElement("td");
+            firstCell.textContent = item.first;
+
+            const secondCell = document.createElement("td");
+            secondCell.textContent = item.second;
+
+            const thirdCell = document.createElement("td");
+            thirdCell.textContent = item.third;
+
+
+            row.appendChild(dateCell);
+            row.appendChild(firstCell);
+            row.appendChild(secondCell);
+            row.appendChild(thirdCell);
+
+            tableBody.appendChild(row);
+        });
+    </script>
+</body>
+</html>
